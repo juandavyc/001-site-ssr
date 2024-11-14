@@ -1,0 +1,16 @@
+<section class="py-10 md:py-16">
+  <div class="container max-w-screen-xl mx-auto px-4">
+    <!-- <h1 class="font-medium text-gray-700 text-3xl md:text-4xl mb-5 text-center sm:text-left">
+      Habilidades
+    </h1> -->
+    <div class="grid grid-col-1 md:grid-cols-3 gap-6">
+      @for (skill of fakeApiResponse; track $index) {
+        <skill-card
+          [icon]="skill.icon"
+          [title]="skill.title"
+          [description]="skill.description"
+        />
+      }
+    </div>
+  </div>
+</section>

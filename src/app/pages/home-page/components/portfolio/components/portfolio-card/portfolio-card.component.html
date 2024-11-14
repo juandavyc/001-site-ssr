@@ -1,0 +1,26 @@
+<div class="flex space-x-6">
+  <h1 class="font-normal text-gray-700 text-3xl md:text-4xl">
+    {{id()}}
+  </h1>
+  <span class="w-28 h-0.5 bg-gray-300 mt-5"></span>
+  <div>
+    <h1 class="font-normal text-gray-700 text-3xl md:text-4xl mb-5">
+      {{title()}}
+    </h1>
+    <div class="flex flex-col sm:flex-row gap-2 ml-3">
+      @for (technology of technologies(); track $index) {
+        <badge [icon]="technology.icon" [name]="technology.name" />
+      }
+    </div>
+    <p class="font-normal text-gray-500 text-sm md:text-base">{{description()}}</p>
+    <div class="m-3 flex flex-col">
+      @for (url of urls(); track $index) {
+        <div>
+          <i [class]="url.icon" class="w-5"></i>
+          <a [href]="url.url" class="m-3 font-medium text-cyan-900 hover:underline">{{url.title}}</a>
+        </div>
+      }
+
+    </div>
+  </div>
+</div>

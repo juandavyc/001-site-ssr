@@ -1,0 +1,33 @@
+<section class="py-10 md:py-16">
+  <div class="container max-w-screen-xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+      <div class="col-span-full md:col-span-4">
+        <h1 class="font-medium text-gray-700 text-3xl md:text-4xl mb-5 text-center sm:text-left">
+          Portafolio
+        </h1>
+        <p class="font-normal text-gray-500 md:text-base">
+          He traído aquí mis proyectos más importantes y favoritos.
+          <br>
+          Aunque algunos de ellos son <b>privados</b> debido a políticas de confidencialidad,
+          he obtenido la autorización para mostrar una <b>demo</b> representativa de mi trabajo.
+
+        </p>
+      </div>
+      <div class="col-span-full md:col-span-8">
+        <div class="space-y-10">
+          @for (project of fakeResponse; track project.id) {
+            <portfolio-card
+              [id]="project.id"
+              [title]="project.title"
+              [technologies]="project.technologies"
+              [description]="project.description"
+              [urls]="project.urls"
+              />
+             <!-- //  -->
+
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
