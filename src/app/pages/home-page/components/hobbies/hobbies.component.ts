@@ -29,8 +29,8 @@ export class HobbiesComponent {
     {
       id:2,
       title: 'GYM',
-      icons:["fa-solid fa-dumbbell","fa-solid fa-heart"],
-      description: `Ir al gimnasio todos los días, sí, pero principalmente por salud. Me ayuda a mantenerme fuerte y en forma.`
+      icons:["fa-solid fa-dumbbell","fa-solid fa-heart text-red-600"],
+      description: `Voy al gimnasio todos los días, sí es posible, pero principalmente voy por salud, ademas me ayuda a mantenerme fuerte y en forma.`
     },
     {
       id:3,

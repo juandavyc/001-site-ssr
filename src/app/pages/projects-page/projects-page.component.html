@@ -1,7 +1,88 @@
 <section class="py-5 md:py-5">
   <div class="container max-w-screen-xl mx-auto px-4">
-    <button (click)="loadProfile()" class="bg-blue-500 rounded p-2 text-white"> loadProfileNow! </button>
+    <button
+      (click)="loadProfile()"
+      class="bg-blue-500 rounded p-2 text-white">
+        loadProfileNow!
+    </button>
+
+
     <br><br>
     {{user() | json}}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="order-2 sm:order-1 col-span-2 ">
+        <div class="grid grid-cols-2 gap-4">
+
+          @for (item of (['1','2','3']); track $index) {
+
+          <div class="p-3 border rounded-md bg-gray-50 shadow-sm  text-gray-600space-y-2">
+            <div class="flex justify-between">
+              <h3 class="text-base text-gray-400">12345</h3>
+              <badge icon="fa-solid fa-code" name="Angular" />
+            </div>
+            <a class="text-base font-bold hover:underline text-sky-700" href="http://www.google.com" rel="noopener noreferrer">
+              Titulo aca
+            </a>
+            <p class="text-xs text-neutral-500 mb-2">
+              Esta es una descripción breve del contenido.
+              Aquí puedes colocar un poco más de información para dar contexto.
+            </p>
+            <div class="text-gray-400 text-xs text-right">Actualizado 14 de noviembre de 2024</div>
+          </div>
+
+          }
+
+        </div>
+      </div>
+      <div class="order-1 sm:order-2">
+        <div class="grid grid-cols-2 gap-1">
+          <div class="col-span-2 ">
+            <div class="bg-gray-50 text-gray-600 p-3 border rounded-md shadow-md hover:bg-slate-100">
+              <!-- profile -->
+              <div class="flex justify-center m-3">
+                <img src="/images/juandavyc.png" class="w-28 h-28" width="112px" height="112px" alt="Image">
+              </div>
+              <div class="flex flex-col items-center">
+                <h4 class="uppercase font-medium  text-lg md:text-2xl ">JUAN YARA CIFUENTES</h4>
+                <h6 class="font-light  md:text-xl ">juandavyc</h6>
+                <p class=" text-wrap ">Un simple desarrollador</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 p-3 rounded-md shadow-md hover:bg-slate-100">
+            <div class="text-center text-gray-600">
+              <h5 class="font-bold text-xl text-green-700 opacity-60">56</h5>
+              <p class="text-sm">repositorios</p>
+            </div>
+          </div>
+          <div class="bg-gray-50 p-3 rounded-md shadow-md hover:bg-slate-100">
+            <div class="text-center">
+              <h5 class="font-bold text-xl text-green-700 opacity-60">{{52244644 | number}}</h5>
+              <p class="text-sm">number</p>
+            </div>
+          </div>
+          <div class="col-span-2">
+            <div class="bg-gray-50 text-gray-600 p-3 shadow-md rounded-md hover:bg-slate-100">
+              <div class="flex flex-col items-start mt-3">
+                <div class="flex items-center">
+                  <i class="fas fa-user-graduate w-8"></i>
+                  <span class="text-lg">Profesor y Full Stack Developer</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-map-marker-alt w-8"></i>
+                  <span class="text-lg">Costa Rica</span>
+                </div>
+                <div class="flex items-center">
+                  <i class="fas fa-link w-8"></i>
+                  <a href="https://fernando-herrera.com" class="text-lg hover:underline">
+                    fernando-herrera.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

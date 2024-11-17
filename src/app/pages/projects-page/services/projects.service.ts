@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
-import { GithubUserResponse } from '../interfaces/github-user-response.interface';
+import { map, Observable, tap } from 'rxjs';
+import { GithubUserResponse, User } from '../interfaces';
+
 
 @Injectable({
   providedIn: 'root'
@@ -51,9 +52,30 @@ export class ProjectsService {
 
   }
 
-  public loadProfile(userName: string): Observable<GithubUserResponse> {
-    return this.http.get<GithubUserResponse>(`${this.API}/${userName}`).pipe(
-      tap(console.log)
+
+  public loadRepositories(userName:string){
+
+    return this.http.get(`${this.API}/${userName}/repos`)
+  }
+
+  public loadProfile(userName: string): Observable<User> {
+    // return this.http.get<GithubUserResponse>(`${this.API}/${userName}`).pipe(
+    //   tap(console.log)
+    // )
+    // i use this for testing only
+    return new Observable<GithubUserResponse>((subs) => {
+      subs.next(this.fakeUserResponse);
+      subs.complete();
+    }).pipe(
+      map(({
+        login, id, avatar_url, html_url, repos_url, events_url,
+        received_events_url, name, company, blog,
+        location, bio, twitter_username, public_repos
+      }) => ({
+        login, id, avatar_url, html_url, repos_url, events_url,
+        received_events_url, name, company, blog,
+        location, bio, twitter_username, public_repos
+      }))
     )
   }
 

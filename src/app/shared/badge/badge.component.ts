@@ -13,7 +13,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class BadgeComponent {
 
-  public icon = input.required<String>();
+  public icon = input<String>('');
   public name = input.required<String>();
 
 }
