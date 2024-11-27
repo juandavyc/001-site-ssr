@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     loadComponent: () => import('./pages/home-page/home-page.component')
   },
   {
@@ -10,11 +10,20 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/projects-page/projects-page.component')
   },
   {
+    path: 'projects/page/:page',
+    loadComponent: () => import('./pages/projects-page/projects-page.component')
+  },
+  {
     path: 'gallery',
     loadComponent: () => import('./pages/gallery-page/gallery-page.component')
   },
   {
+    path: '',
+    redirectTo: 'projects',
+    pathMatch: 'full',
+  },
+  {
     path: '**',
-    redirectTo: ''
+    redirectTo: 'home'
   }
 ];

@@ -1,3 +1,8 @@
+export interface UserState {
+  data: User | null;
+  error: boolean;
+}
+
 export interface User {
   login:               string;
   id:                  number;

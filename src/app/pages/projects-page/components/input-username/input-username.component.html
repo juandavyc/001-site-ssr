@@ -1,0 +1,24 @@
+<input
+  type="text"
+  [formControl]="searchInput"
+  [value]="username()"
+  required
+  minlength="3"
+  maxlength="20"
+  autocomplete="off"
+  class="border border-gray-300 rounded-md px-3 py-2 mt-1 w-full focus:ring-2 focus:ring-cyan-600"
+  />
+
+  @if (searchInput.invalid && searchInput.touched) {
+    <ul class="list-disc m-3 text-red-500">
+    @if(searchInput.hasError('required')){
+     <li>Es requerido</li>
+    }
+    @if(searchInput.hasError('minlength')){
+      <li>El usuario debe tener minimo 3 caracteres </li>
+    }
+    @if(searchInput.hasError('maxlength')){
+      <li>El usuario no puede exceder los 15 caracteres</li>
+    }
+  </ul>
+  }
