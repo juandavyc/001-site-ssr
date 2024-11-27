@@ -19,7 +19,7 @@ export class InputUsernameComponent {
   // servicio
   private userService = inject(UsernameService);
 
-  public searchInput = new FormControl(this.userService.getUser,[
+  public searchInput = new FormControl(this.userService.getUser, [
     Validators.required,
     Validators.minLength(3),
     Validators.maxLength(15)
@@ -28,12 +28,14 @@ export class InputUsernameComponent {
 
   constructor() {
     effect(() => {
-      this.searchInput.valueChanges.pipe(
-        debounceTime(400),
-        distinctUntilChanged()
-      ).subscribe(user=>{
-        this.userService.setUser(user ?? 'juandavyc');
-      })
+      if (this.searchInput.valid) {
+        this.searchInput.valueChanges.pipe(
+          debounceTime(400),
+          distinctUntilChanged()
+        ).subscribe(user => {
+          this.userService.setUser(user ?? 'juandavyc');
+        })
+      }
     }, { allowSignalWrites: true })
   }
 

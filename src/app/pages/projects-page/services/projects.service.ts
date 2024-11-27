@@ -1074,23 +1074,23 @@ export class ProjectsService {
 
 
   public loadRepositories(userName: string, page: number): Observable<GithubRepositoriesResponse[]> {
-    return new Observable<GithubRepositoriesResponse[]>((subs) => {
-      //subs.error(this.fakeUserResponseErrsaxcsadsdarefor);
-      subs.next(this.fakeRepositoriesResponse);
-      subs.complete();
-    }).pipe(
-      //filter((repositories)=> !!repositories),
-      catchError((error) => {
-        return of([]);
-      })
-    )
-    // const url = `${this.API}/${userName}/repos?page=${page}&per_page=8`;
-    // return this.http.get<GithubRepositoriesResponse[]>(url)
-    // .pipe(
-    //   catchError((error)=>{
-    //     return throwError(()=> new Error(error));
+    // return new Observable<GithubRepositoriesResponse[]>((subs) => {
+    //   //subs.error(this.fakeUserResponseErrsaxcsadsdarefor);
+    //   subs.next(this.fakeRepositoriesResponse);
+    //   subs.complete();
+    // }).pipe(
+    //   //filter((repositories)=> !!repositories),
+    //   catchError((error) => {
+    //     return of([]);
     //   })
     // )
+    const url = `${this.API}/${userName}/repos?page=${page}&per_page=8&sort=stars&order=desc`;
+    return this.http.get<GithubRepositoriesResponse[]>(url)
+    .pipe(
+      catchError((error)=>{
+        return throwError(()=> new Error(error));
+      })
+    )
   }
 
   public loadUser(userName: string): Observable<User | null> {

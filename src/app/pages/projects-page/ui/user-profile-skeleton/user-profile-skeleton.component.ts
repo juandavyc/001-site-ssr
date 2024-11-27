@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'user-profile-skeleton',
@@ -11,4 +11,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './user-profile-skeleton.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserProfileSkeletonComponent { }
+export class UserProfileSkeletonComponent {
+
+ }

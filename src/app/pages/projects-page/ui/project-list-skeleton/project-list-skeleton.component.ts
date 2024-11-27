@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'project-list-skeleton',
@@ -11,4 +11,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './project-list-skeleton.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProjectListSkeletonComponent { }
+export class ProjectListSkeletonComponent {
+  public toggleLayout = input<boolean>(true);
+}

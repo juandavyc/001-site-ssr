@@ -48,6 +48,8 @@ export default class ProjectsPageComponent {
 
   public maxPages = signal<number>(0);
 
+  public isLayout = signal<boolean>(false);
+
   public currentPage = toSignal<number>(
     this.route.params.pipe(
       map(params => params['page'] ?? '1'),
@@ -117,6 +119,10 @@ export default class ProjectsPageComponent {
       ).subscribe({
         error: (err) => console.error('Error en la carga de usuario:', err)
       });
+  }
+
+  public toggleLayout(type:boolean):void{
+    this.isLayout.set(type);
   }
 
 }

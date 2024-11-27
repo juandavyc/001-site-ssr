@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 gap-4">
+<div class="grid gap-2" [class.grid-cols-1]="toggleLayout()" [class.grid-cols-2]="!toggleLayout()">
   @for (repository of repositories(); track $index) {
     <project-card [project]="repository" />
   }
@@ -8,15 +8,3 @@
   </div>
   }
 </div>
-
-<!-- <div class="flex flex-row items-center justify-center gap-3 mt-2">
-  <button [disabled]="currentPage() == 1" [routerLink]="['/projects/page',currentPage()!-1]" r
-    class="bg-blue-400 rounded p-2 text-white">
-    Anterior
-  </button>
-  <p>{{currentPage()}} - {{maxPages()}}</p>
-  <button [disabled]="currentPage() == maxPages()" [routerLink]="['/projects/page',currentPage()!+1]"
-    class="bg-blue-400 rounded p-2 text-white">
-    Siguiente
-  </button>
-</div> -->
