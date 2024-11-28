@@ -1,20 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, signal, Pipe } from '@angular/core';
 import { ProjectsService } from './services/projects.service';
-import { User, UserState } from './interfaces';
+import { UserState } from './interfaces';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { catchError, debounceTime, filter, forkJoin, map, switchMap, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, tap } from 'rxjs';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserProfileSkeletonComponent } from './ui/user-profile-skeleton/user-profile-skeleton.component';
-import { GithubRepositoriesResponse, RepositoriesState } from './interfaces/github-repositories-response.interface';
+import { RepositoriesState, Item } from './interfaces/github-repositories-response.interface';
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { ProjectListSkeletonComponent } from './ui/project-list-skeleton/project-list-skeleton.component';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InputUsernameComponent } from './components/input-username/input-username.component';
-import { UsernameService } from './services/username.service';
-
-
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RepositoryFilterComponent } from './components/repository-filter/repository-filter.component';
+import { RepositoryUserComponent } from './components/repository-user/repository-user.component';
+import { RepositoriesFilterService } from './services/repositories-filter.service';
 
 @Component({
   selector: 'app-projects-page',
@@ -25,9 +24,10 @@ import { UsernameService } from './services/username.service';
     UserProfileSkeletonComponent,
     ProjectListComponent,
     ProjectListSkeletonComponent,
-    InputUsernameComponent,
-    RouterLink,
-    FormsModule
+    ReactiveFormsModule,
+    //
+    RepositoryUserComponent,
+    RepositoryFilterComponent,
   ],
   templateUrl: './projects-page.component.html',
   styleUrl: './projects-page.component.css',
@@ -35,48 +35,69 @@ import { UsernameService } from './services/username.service';
 })
 export default class ProjectsPageComponent {
 
-  public username = signal<string>('');
 
-  private userService = inject(UsernameService)
+  private filterService = inject(RepositoriesFilterService);
   private service = inject(ProjectsService);
 
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
+  // private route = inject(ActivatedRoute);
+  // private router = inject(Router);
 
   public user = signal<UserState>({ data: null, error: false });
   public repositories = signal<RepositoriesState>({ data: [], error: false });
 
-  public maxPages = signal<number>(0);
-
   public isLayout = signal<boolean>(false);
 
-  public currentPage = toSignal<number>(
-    this.route.params.pipe(
-      map(params => params['page'] ?? '1'),
-      map(page => isNaN(Number(page)) ? 1 : Number(page)),
-      map(page => Math.max(1, page)),
-    )
-  );
+  public currentPage = computed(() => {
+    return this.filterService.getCurrentPage();
+  });
 
+  public userLoaded = signal<boolean>(false);
+
+  public maxPages = computed(() => {
+    return this.filterService.getMaxPages();
+  });
+
+
+  public userNameComputed = computed(()=>{
+    const userName = this.filterService.getUserName();
+    return userName;
+  })
+
+
+  // navigation
+  // public currentPage = toSignal<number>(
+  //   this.route.params.pipe(
+  //     map(params => params['page'] ?? '1'),
+  //     map(page => isNaN(Number(page)) ? 1 : Number(page)),
+  //     map(page => Math.max(1, page)),
+  //   )
+  // );
   constructor() {
     effect(() => {
-      if (this.user().data !== null) {
-        const currentPage = this.currentPage();
-        this.loadRepositories(currentPage);
-      }
+      // si cambia el userName
+      const userName = this.filterService.getUserName();
+      if (userName.length > 0)this.loadUser();
     }, { allowSignalWrites: true })
-    effect(() => {
-      const username = this.userService.getUser;
-      if (username.length > 0) {
 
-        this.username.set(username);
-        this.loadProfile();
+    effect(() => {
+      // si el user tiene datos
+      if(this.userLoaded()){
+        if(this.user().data !== null && this.user().error == false){
+        this.loadRepositories();
+        }
       }
     }, { allowSignalWrites: true })
+
   }
 
-  public loadRepositories(page: number = 1): void {
-    this.service.loadRepositories(this.username(), page)
+  public loadRepositories(): void {
+    this.service.loadRepositories({
+      userName: this.filterService.getUserName(),
+      repository: this.filterService.getRepository(),
+      language: this.filterService.getLanguage().toLocaleLowerCase(),
+      sort: this.filterService.getSort().toLocaleLowerCase(),
+      page: this.filterService.getCurrentPage()
+    })
       .pipe(
         tap(() => this.repositories.set({ data: [], error: false })),
         tap((repositories) => {
@@ -87,15 +108,17 @@ export default class ProjectsPageComponent {
           else {
             this.repositories.set({ data: repositories, error: false })
           }
-        })
+        }),
+        // aca va el max pages
+        tap(console.log)
       ).subscribe({
         error: (err) => console.error('Error en la carga de repositorios:', err)
       });
   }
 
-  public loadProfile(): void {
-
-    this.service.loadUser(this.username())
+  public loadUser(): void {
+    this.userLoaded.set(false);
+    this.service.loadUser(this.filterService.getUserName())
       .pipe(
         tap(() => {
           this.user.set({ data: null, error: false })
@@ -108,21 +131,28 @@ export default class ProjectsPageComponent {
           }
           else {
             this.user.set({ data: user, error: false });
-            this.maxPages.set(Math.ceil(user.public_repos / 8));
+           // this.filterService.setMaxPages(Math.ceil(user.public_repos / 8));
           }
         }),
-        tap(() => {
-          if (this.currentPage()! > this.maxPages()) {
-            this.router.navigateByUrl(`/projects/page/${this.maxPages()}`);
-          }
-        })
+        tap(console.log)
+        // navigation by route
+        // tap(() => {
+          // if (this.currentPage()! > this.maxPages()) {
+          //   this.router.navigateByUrl(`/projects/page/${this.maxPages()}`);
+          // }
+        // })
       ).subscribe({
-        error: (err) => console.error('Error en la carga de usuario:', err)
+        error: (err) => console.error('Error en la carga de usuario:', err),
+        complete:(()=>    this.userLoaded.set(true))
       });
   }
 
-  public toggleLayout(type:boolean):void{
+  public toggleLayout(type: boolean): void {
     this.isLayout.set(type);
+  }
+
+  public currentPageEvent(aa: number) {
+    this.filterService.setCurrentPage(this.filterService.getCurrentPage() + (aa));
   }
 
 }

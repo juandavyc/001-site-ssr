@@ -9,17 +9,17 @@ export const routes: Routes = [
     path: 'projects',
     loadComponent: () => import('./pages/projects-page/projects-page.component')
   },
-  {
-    path: 'projects/page/:page',
-    loadComponent: () => import('./pages/projects-page/projects-page.component')
-  },
+  // {
+  //   path: 'projects/page/:page',
+  //   loadComponent: () => import('./pages/projects-page/projects-page.component')
+  // },
   {
     path: 'gallery',
     loadComponent: () => import('./pages/gallery-page/gallery-page.component')
   },
   {
     path: '',
-    redirectTo: 'projects',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {

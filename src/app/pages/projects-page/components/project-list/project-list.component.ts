@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input, signal } from '@angular/core';
-import { GithubRepositoriesResponse } from '../../interfaces/github-repositories-response.interface';
+import { GithubRepositoriesResponse, Item } from '../../interfaces/github-repositories-response.interface';
 import { ProjectCardComponent } from '../project-card/project-card.component';
 import { CommonModule } from '@angular/common';
 
@@ -16,6 +16,6 @@ import { CommonModule } from '@angular/common';
 })
 export class ProjectListComponent {
 
-  public repositories = input.required<GithubRepositoriesResponse[]>();
+  public repositories = input.required<Item[]>();
   public toggleLayout = input<boolean>(true);
 }

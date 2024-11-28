@@ -1,0 +1,30 @@
+<form [formGroup]="myForm">
+  <div class="flex flex-col gap-2 ">
+    <h4 class="font-bold text-purple-500">Repositorios de</h4>
+    <input
+      type="text"
+      formControlName="userName"
+      required
+      minlength="3"
+      maxlength="20"
+      autocomplete="off"
+      class="border border-purple-200 rounded-md px-3 py-2 mt-1 w-full" />
+
+
+      {{repositoryaa()}}
+    <!-- @if (searchInput.invalid && searchInput.touched) {
+    <ul class="list-disc m-3 text-red-500">
+      @if(searchInput.hasError('required')){
+      <li>Es requerido</li>
+      }
+      @if(searchInput.hasError('minlength')){
+      <li>El usuario debe tener minimo 3 caracteres </li>
+      }
+      @if(searchInput.hasError('maxlength')){
+      <li>El usuario no puede exceder los 15 caracteres</li>
+      }
+    </ul>
+    } -->
+    <h4 class="text-center font-bold text-cyan-600">¡Puedes ingresar el tuyo!</h4>
+  </div>
+</form>

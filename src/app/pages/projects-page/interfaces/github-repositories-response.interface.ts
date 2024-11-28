@@ -1,9 +1,15 @@
 export interface RepositoriesState{
-  data: GithubRepositoriesResponse[] | [];
+  data: Item[];
   error: boolean;
 }
 
 export interface GithubRepositoriesResponse {
+  total_count:        number;
+  incomplete_results: boolean;
+  items:              Item[];
+}
+
+export interface Item {
   id:                          number;
   node_id:                     string;
   name:                        string;
@@ -11,7 +17,7 @@ export interface GithubRepositoriesResponse {
   private:                     boolean;
   owner:                       Owner;
   html_url:                    string;
-  description:                 string | null;
+  description:                 string;
   fork:                        boolean;
   url:                         string;
   forks_url:                   string;
@@ -57,7 +63,7 @@ export interface GithubRepositoriesResponse {
   ssh_url:                     string;
   clone_url:                   string;
   svn_url:                     string;
-  homepage:                    null;
+  homepage:                    null | string;
   size:                        number;
   stargazers_count:            number;
   watchers_count:              number;
@@ -73,16 +79,25 @@ export interface GithubRepositoriesResponse {
   archived:                    boolean;
   disabled:                    boolean;
   open_issues_count:           number;
-  license:                     null;
+  license:                     License | null;
   allow_forking:               boolean;
   is_template:                 boolean;
   web_commit_signoff_required: boolean;
-  topics:                      any[];
+  topics:                      string[];
   visibility:                  string;
   forks:                       number;
   open_issues:                 number;
   watchers:                    number;
   default_branch:              string;
+  score:                       number;
+}
+
+export interface License {
+  key:     string;
+  name:    string;
+  spdx_id: string;
+  url:     string;
+  node_id: string;
 }
 
 export interface Owner {

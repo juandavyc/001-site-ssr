@@ -1,32 +1,13 @@
 <section class="py-5 md:py-5">
   <div class="container max-w-screen-xl mx-auto px-4">
-
-    <div class="flex justify-normal gap-1">
-
+    <div>
+      Actual: {{userNameComputed()}}
+      <br>
     </div>
-    <br><br>
-    <div class="container mx-auto p-4">
-      <div class="flex mb-4">
-        <input
-          type="text"
-          placeholder="Nombre de usuario de GitHub"
-          class="flex-1 px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-600" />
-      </div>
-      <div class="flex mb-4 space-x-4">
-        <select class="px-4 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-600">
-          <option value="">Todos los lenguajes</option>
-          <option value="JavaScript">JavaScript</option>
-          <option value="Python">Python</option>
-          <option value="Java">Java</option>
-          <option value="C++">C++</option>
-        </select>
-      </div>
-    </div>
-
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="order-1 sm:order-2 col-span-1 ">
-        <div class="bg-purple-50 border-purple-400 border-2 p-3 shadow-md rounded-md  mb-2">
-          <input-username />
+      <div class="order-1 md:order-2 col-span-1 ">
+        <div class="bg-purple-50 border-purple-400 border-2 p-3 shadow-md rounded-md mb-2">
+          <repository-user />
         </div>
         @if(user().data === null){
           @if(user().error){
@@ -37,11 +18,13 @@
           }
         }
         @else{
-        <user-profile [user]="user().data" />
+          <user-profile [user]="user().data" />
         }
       </div>
-      <div class="order-2 sm:order-1 col-span-2">
+      <div class="order-2 md:order-1 col-span-2">
+        <repository-filter />
         @if(repositories().data.length > 0){
+
           <div class="flex justify-end gap-2 mb-3">
             <button
               (click)="toggleLayout(true)"
@@ -61,13 +44,15 @@
           </div>
           <project-list [repositories]="repositories().data" [toggleLayout]="isLayout()" />
           <div class="flex justify-between items-center bg-gray-50 p-4 my-4 rounded-md border shadow-md">
-            <button [disabled]="currentPage()! <= 1" [routerLink]="['/projects/page', (currentPage()! - 1)]"
+            <!-- [routerLink]="['/projects/page', (currentPage()! - 1)]" -->
+            <button [disabled]="currentPage()! <= 1"
+            (click)="currentPageEvent(-1)"
               class="px-4 py-2 bg-cyan-800 text-white rounded-full transition-colors duration-300 ease-in-out hover:bg-cyan-600 disabled:bg-gray-400 disabled:cursor-not-allowed">
               <i class="fa-solid fa-arrow-left"></i> Anterior
             </button>
             <h4 class="text-2xl font-semibold text-gray-700">{{ currentPage() }} / {{ maxPages() }}</h4>
 
-            <button [disabled]="currentPage() === maxPages()" [routerLink]="['/projects/page', (currentPage()! + 1)]"
+            <button [disabled]="currentPage() === maxPages()" (click)="currentPageEvent(+1)"
               class="px-4 py-2 bg-cyan-800 text-white rounded-full transition-colors duration-300 ease-in-out hover:bg-cyan-600 disabled:bg-gray-400 disabled:cursor-not-allowed">
               Siguiente <i class="fa-solid fa-arrow-right"></i>
             </button>
@@ -78,7 +63,7 @@
             <p>error al cargar repositorios</p>
           }
           @else {
-            <project-list-skeleton />
+            <project-list-skeleton [toggleLayout]="isLayout()" />
           }
         }
       </div>
