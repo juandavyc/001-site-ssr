@@ -9,6 +9,10 @@ export const routes: Routes = [
     path: 'projects',
     loadComponent: () => import('./pages/projects-page/projects-page.component')
   },
+  {
+    path: 'projects-on-github',
+    loadComponent: () => import('./pages/projects-on-github-page/projects-on-github-page.component')
+  },
   // {
   //   path: 'projects/page/:page',
   //   loadComponent: () => import('./pages/projects-page/projects-page.component')

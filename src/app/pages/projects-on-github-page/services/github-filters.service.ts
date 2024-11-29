@@ -1,13 +1,12 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RepositoriesFilterService {
+export class GithubFiltersService {
 
   // usuario que se buscaran los repositorios
   private userName = signal<string>('juandavyc');
-
   // filtros del formulario
   private repository = signal<string>('');
   private language = signal<string>('');
@@ -18,10 +17,12 @@ export class RepositoriesFilterService {
 
   public isResetFilter = signal<boolean>(false);
 
+  public isLoadedUser = signal<boolean>(false);
+
+
   constructor() {
 
   }
-
   // setters
   public getUserName(): string {
     return this.userName();
@@ -70,22 +71,22 @@ export class RepositoriesFilterService {
     this.maxPages.set(value);
   }
 
+  // test
+
   public resetFilter(): void {
-    this.isResetFilter.set(true)
-    this.setRepository('');
-    this.setLanguage('');
-    this.setSort('');
-    setTimeout(() => {
-      this.isResetFilter.set(false)
-    }, 500)
+    //this.isResetFilter.set(true)
+    this.repository.set('');
+    this.language.set('');
+    this.sort.set('');
+    // setTimeout(() => {
+    //   this.isResetFilter.set(false)
+    // }, 500)
   }
 
   public resetService(): void {
-    //console.log("resetService");
-    //this.setUserName('');
     this.setCurrentPage(1);
     this.setMaxPages(1);
-    //this.isResetFilter.set(false);
   }
+
 
 }

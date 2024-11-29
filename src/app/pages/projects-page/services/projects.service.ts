@@ -927,65 +927,65 @@ export class ProjectsService {
     const pageOrder = `page=${params.page}&per_page=8&sort=${params.sort}&order=desc`;
     const url = `${this.API}/search/repositories?q=${query}&${pageOrder}`;
     console.log(url);
-    return this.http.get<GithubRepositoriesResponse>(url)
-    .pipe(
-      map(repo => repo.items),
-      catchError((error)=>{
-        return throwError(()=> new Error(error));
-      })
-    )
-
-    // return new Observable<GithubRepositoriesResponse>((subs) => {
-    //   subs.next(this.fakeRepositoriesResponse);
-    //   subs.complete();
-    // }).pipe(
+    // return this.http.get<GithubRepositoriesResponse>(url)
+    // .pipe(
     //   map(repo => repo.items),
-    //   catchError((error) => {
-    //     return of([]);
+    //   catchError((error)=>{
+    //     return throwError(()=> new Error(error));
     //   })
     // )
+
+    return new Observable<GithubRepositoriesResponse>((subs) => {
+      subs.next(this.fakeRepositoriesResponse);
+      subs.complete();
+    }).pipe(
+      map(repo => repo.items),
+      catchError((error) => {
+        return of([]);
+      })
+    )
 
 
   }
 
   public loadUser(userName:string): Observable<User | null> {
 
-    // return new Observable<GithubUserResponse>((subs) => {
-    //   //subs.error(this.fakeUserResponseError);
-    //   subs.next(this.fakeUserResponse);
-    //   subs.complete();
-    // }).pipe(
-    //   map(({
-    //     login, id, avatar_url, html_url, repos_url, events_url,
-    //     received_events_url, name, company, blog,
-    //     location, bio, twitter_username, public_repos
-    //   }) => ({
-    //     login, id, avatar_url, html_url, repos_url, events_url,
-    //     received_events_url, name, company, blog,
-    //     location, bio, twitter_username, public_repos
-    //   })),
+    return new Observable<GithubUserResponse>((subs) => {
+      //subs.error(this.fakeUserResponseError);
+      subs.next(this.fakeUserResponse);
+      subs.complete();
+    }).pipe(
+      map(({
+        login, id, avatar_url, html_url, repos_url, events_url,
+        received_events_url, name, company, blog,
+        location, bio, twitter_username, public_repos
+      }) => ({
+        login, id, avatar_url, html_url, repos_url, events_url,
+        received_events_url, name, company, blog,
+        location, bio, twitter_username, public_repos
+      })),
 
-    //   catchError((error) => {
-    //    // console.error(error)
-    //     return of(null)
-    //   })
-    // )
+      catchError((error) => {
+       // console.error(error)
+        return of(null)
+      })
+    )
 
-    return this.http.get<GithubUserResponse>(`${this.API}/users/${userName}`)
-      .pipe(
-        map(({
-          login, id, avatar_url, html_url, repos_url, events_url,
-          received_events_url, name, company, blog,
-          location, bio, twitter_username, public_repos
-        }) => ({
-          login, id, avatar_url, html_url, repos_url, events_url,
-          received_events_url, name, company, blog,
-          location, bio, twitter_username, public_repos
-        })
-        ),
-        catchError((error) => {
-          return of(null)
-        })
-      );
+    // return this.http.get<GithubUserResponse>(`${this.API}/users/${userName}`)
+    //   .pipe(
+    //     map(({
+    //       login, id, avatar_url, html_url, repos_url, events_url,
+    //       received_events_url, name, company, blog,
+    //       location, bio, twitter_username, public_repos
+    //     }) => ({
+    //       login, id, avatar_url, html_url, repos_url, events_url,
+    //       received_events_url, name, company, blog,
+    //       location, bio, twitter_username, public_repos
+    //     })
+    //     ),
+    //     catchError((error) => {
+    //       return of(null)
+    //     })
+    //   );
   }
 }

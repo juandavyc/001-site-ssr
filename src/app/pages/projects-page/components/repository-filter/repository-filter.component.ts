@@ -60,6 +60,7 @@ export class RepositoryFilterComponent {
   constructor() {
 
     effect(()=>{
+      //console.log(this.filterService.isResetFilter());
       if(this.filterService.isResetFilter()){
         this.resetForm();
       }
@@ -108,6 +109,8 @@ export class RepositoryFilterComponent {
     //   sort: ''
     // });
     this.filterService.resetFilter();
+
+    console.log("xxx");
   }
 
 }

@@ -1,0 +1,30 @@
+Error: {{userData().error }}
+<br><br>
+isNull: {{userData().data === null }}
+<br><br>
+
+@if(userData().data === null){
+   @if(userData().error){
+    <p>error al cargar</p>
+   }
+   @else{
+    <p>Cargando</p>
+   }
+}
+@else{
+  {{userData() | json }}
+}
+
+<!-- @if(userStatus().error == false  && userStatus().load == false && userStatus().data == false){
+  <p>cargando ... </p>
+}
+@else{
+  @if(userStatus().error){
+    <p>error al cargar el usuario</p>
+  }
+  @if(userStatus().load || userData() === null){
+    {{userData() | json}}
+  }
+} -->
+
+

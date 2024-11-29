@@ -1,0 +1,18 @@
+Error: {{repositories().error }}
+<br><br>
+isNull: {{repositories().data  === null }}
+<br><br>
+length: {{repositories().data.length}}
+<br><br>
+
+@if((repositories().data.length == 0)){
+  @if(repositories().error){
+    <p>error al cargar repositorios</p>
+  }
+  @else {
+    <p>Cargando...</p>
+  }
+}
+@else{
+  {{repositories().data | json}}
+}
