@@ -1,10 +1,11 @@
 import type { HttpInterceptorFn } from '@angular/common/http';
+import { environment } from '../../../enviroments/environments';
 
 export const tokenHeaderInterceptor: HttpInterceptorFn = (
   req,
   next
 ) => {
-  const token = 'TOKEN';
+  const token = environment.baseUrl;
 
   if(token){
 
