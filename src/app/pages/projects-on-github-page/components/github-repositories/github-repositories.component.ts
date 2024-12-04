@@ -5,8 +5,6 @@ import { GithubRepositoryCardComponent } from '../github-repository-card/github-
 import { GithubRepositoriesSkeletonComponent } from "../../ui/github-repositories-skeleton/github-repositories-skeleton.component";
 import { GithubFiltersService } from '../../services/github-filters.service';
 import { GithubRepositoriesService } from '../../services/github-repositories.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { tokenHeaderInterceptor } from '../../../../auth/http/token-header.interceptor';
 @Component({
   selector: 'github-repositories',
   standalone: true,
