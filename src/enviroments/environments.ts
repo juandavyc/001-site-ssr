@@ -1,3 +1,4 @@
 export const environment = {
- token: ''
+  baseUrl: 'https://api.github.com/',
+  token: ''
 }
