@@ -15,10 +15,9 @@ export class GithubFiltersService {
   private currentPage = signal<number>(1);
   private maxPages = signal<number>(1);
 
-  public isResetFilter = signal<boolean>(false);
-
+  //public isResetFilter = signal<boolean>(false);
   public isLoadedUser = signal<boolean>(false);
-
+  public isGridView = signal<boolean>(true);
 
   constructor() {
 
@@ -74,19 +73,20 @@ export class GithubFiltersService {
   // test
 
   public resetFilter(): void {
-    //this.isResetFilter.set(true)
+    //this.isResetFilter.set(true);
     this.repository.set('');
     this.language.set('');
     this.sort.set('');
+    this.currentPage.set(1);
     // setTimeout(() => {
     //   this.isResetFilter.set(false)
     // }, 500)
   }
 
-  public resetService(): void {
-    this.setCurrentPage(1);
-    this.setMaxPages(1);
-  }
+  // public resetService(): void {
+
+  //   this.setMaxPages(1);
+  // }
 
 
 }

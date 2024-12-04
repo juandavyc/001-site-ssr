@@ -1,14 +1,29 @@
-export interface RepositoriesState{
-  data: Item[];
+export interface RepositoriesFetchState{
+  data: GithubRepositoriesResponse | null;
   error: boolean;
 }
+
+
+export interface Error {
+  message:           string;
+  errors:            ErrorElement[];
+  documentation_url: string;
+  status:            string;
+}
+
+export interface ErrorElement {
+  message:  string;
+  resource: string;
+  field:    string;
+  code:     string;
+}
+
 
 export interface GithubRepositoriesResponse {
   total_count:        number;
   incomplete_results: boolean;
   items:              Item[];
 }
-
 export interface Item {
   id:                          number;
   node_id:                     string;

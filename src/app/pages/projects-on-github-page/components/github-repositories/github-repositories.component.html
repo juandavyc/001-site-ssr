@@ -1,18 +1,52 @@
-Error: {{repositories().error }}
-<br><br>
-isNull: {{repositories().data  === null }}
-<br><br>
-length: {{repositories().data.length}}
-<br><br>
 
-@if((repositories().data.length == 0)){
-  @if(repositories().error){
-    <p>error al cargar repositorios</p>
+@let repositories = repositoriesData();
+@if (repositories !== null) {
+  @if (repositories.error && repositories.data) {
+    <p>Error al cargar</p> <br>
+    {{ repositories.data | json }}
+  }
+  @if (repositories.error){
+    <p>Error al cargar los repositorios</p>
   }
   @else {
-    <p>Cargando...</p>
+    @if (repositories.data === null) {
+
+      <github-repositories-skeleton
+        [isGridView]="isGridView()"/>
+
+    }
+    @else {
+      @if (repositories.data.items && repositories.data.items.length > 0) {
+
+       <div
+       class="grid gap-2"
+       [ngClass]="isGridView() ? 'grid-cols-2' : 'grid-cols-1'">
+
+        @for (repository of repositories.data.items; track repository.id) {
+          <github-repository-card
+            [repository]="repository" />
+        }
+        <!-- paginacion-->
+         <div class="col-span-full">
+          <div class="flex justify-between items-center bg-gray-50 p-4 my-4 rounded-md border shadow-md">
+            <button
+              [disabled]="currentPage()<=1"
+              (click)="previusOrNextPage(-1)"
+              class="px-4 py-2 bg-cyan-800 text-white rounded-full transition-colors duration-300 ease-in-out hover:bg-cyan-600 disabled:bg-gray-400 disabled:cursor-not-allowed">
+              <i class="fa-solid fa-arrow-left"></i> Anterior
+            </button>
+              {{ currentPage()}} / {{getMaxPages(repositories.data.total_count)}}
+            <button
+              [disabled]="getMaxPages(repositories.data.total_count) == currentPage()"
+              (click)="previusOrNextPage(+1)"
+              class="px-4 py-2 bg-cyan-800 text-white rounded-full transition-colors duration-300 ease-in-out hover:bg-cyan-600 disabled:bg-gray-400 disabled:cursor-not-allowed">
+              Siguiente <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+      <!-- [class.grid-cols-1]="toggleLayout()" [class.grid-cols-2]="!toggleLayout()" -->
+    }
   }
-}
-@else{
-  {{repositories().data | json}}
 }

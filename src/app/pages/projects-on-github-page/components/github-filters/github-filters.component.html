@@ -1,77 +1,61 @@
 <form [formGroup]="myForm" autocomplete="off">
-  <div class="">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 my-3">
-      <div class="col-span-1">
-        <div class="bg-gray-50 border rounded shadow-sm mb-3 px-4 pt-2 pb-5">
-          <div class="flex flex-col gap-2">
-            <label for="user" class="text-sm font-bold text-gray-600">Repositorios de:</label>
-            <input
-              id="user"
-              type="text"
-              formControlName="userName"
-
-              placeholder="Repositorio de"
-              required
-              minlength="3"
-              maxlength="20"
-              autocomplete="off"
-              class="w-full p-2 py-1 leading-5 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-600" />
-          </div>
+  <div class="flex justify-center items-center mt-4 p-4">
+    <p class="text-xl text-center text-gray-700">
+      ¡Vamos, tambien puedes buscar por tu usuario!
+    </p>
+  </div>
+  <div class="flex flex-col md:flex-row md:items-center ">
+    <div class="flex justify-center w-full mb-4">
+      <div class="flex flex-col md:flex-row w-full md:w-7/12 gap-2 md:gap-0">
+        <div class="relative flex-2">
+          <input type="text" formControlName="userName" required minlength="3" maxlength="20" placeholder="Buscar usuario"
+            class="input-username">
+          <i class="fas fa-user icon-input"></i>
         </div>
-      </div>
-      <div class="col-span-2">
-        <div class="bg-gray-50 border rounded shadow-sm mb-3 px-4 pt-2 pb-5">
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
-            <div class="col-span-2">
-              <label for="repository" class="block mb-2 text-sm font-bold text-gray-600">ej: php-crud...</label>
-              <input
-                id="repository"
-                formControlName="repository"
-
-                minlength="2"
-                maxlength="20"
-                type="text"
-                placeholder="Buscar un repositorio"
-                class="w-full p-2 py-1 leading-5 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-600" />
-            </div>
-            <div class="col-span-2">
-              <label for="repository" class="block mb-2 text-sm font-bold text-gray-600">Filtrar por</label>
-              <div class="grid grid-cols-2 gap-2">
-                <div class="flex flex-col">
-                  <select
-                    formControlName="language"
-                    class="p-2 py-1 leading-5 rounded shadow-sm focus:outline-none bg-gray-200 border focus:ring-2 focus:ring-cyan-600">
-                    <option value="">Lenguaje</option>
-                    @for(language of programmingLanguages | keyvalue; track $index){
-                      <option [value]="language.key">{{language.value}}</option>
-                    }
-                  </select>
-                  <span class="text-sm italic text-gray-500 ml-1"></span>
-                </div>
-                <div class="flex flex-col">
-                  <select
-                    formControlName="sort"
-                    class="p-2 py-1 leading-5 rounded shadow-sm focus:outline-none bg-gray-200 border focus:ring-2 focus:ring-cyan-600">
-                    <option value="">Ordenar</option>
-                    @for (sort of sortFilter | keyvalue; track $index) {
-                      <option [value]="sort.key">{{sort.value}}</option>
-                    }
-                  </select>
-                  <span class="text-sm italic text-gray-500 ml-1"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-span-full">
-        <div class="flex justify-center items-center">
-          <p class="text-center text-sm"> make url: </p>
-          <button (click)="resetForm()" class="hover:text-cyan-700">
-            <i class="fa-solid fa-circle-xmark"></i> Limpiar
-          </button>
+        <div class="relative flex-1">
+          <input type="text" formControlName="repository" minlength="2" maxlength="20" placeholder="Buscar repositorio"
+            class="input-repository" />
+          <i class="fas fa-search icon-input"></i>
         </div>
       </div>
     </div>
+  </div>
+  <div class="flex flex-col gap-2 lg:flex-row lg:justify-center lg:items-center">
+    <div class="flex flex-row justify-center items-center gap-2">
+      <button [class.text-blue-400]="getGridView()" (click)="setGridView(true)"
+        class="border-2 rounded-md px-3 py-1 bg-gray-50 hover:text-blue-400 w-12">
+        <i class="fa-solid fa-grip-vertical"></i>
+      </button>
+      <button [class.text-blue-400]="!getGridView()" (click)="setGridView(false)"
+        class="border-2 rounded-md px-3 py-1 bg-gray-50 hover:text-blue-400 w-12">
+        <i class="fa-solid fa-list"></i>
+      </button>
+    </div>
+    <div class="flex flex-row justify-center items-center gap-2">
+      <select formControlName="language" class="px-4 py-2 border rounded-lg">
+        <option value="">Lenguaje</option>
+        @for(language of programmingLanguages | keyvalue; track $index){
+        <option [value]="
+            language.key">{{language.value}}</option>
+        }
+      </select>
+      <select formControlName="sort" class="px-4 py-2 border rounded-lg">
+        <option value="">Ordenar</option>
+        @for (sort of sortFilter | keyvalue; track $index) {
+        <option [value]="sort.key">{{sort.value}}</option>
+        }
+      </select>
+    </div>
+  </div>
+  <div class="flex flex-col sm:flex-row  gap-2 justify-center items-center my-3 text-sm text-gray-500">
+    @if (searchParams().userName) { <span>Usuario: <b> {{searchParams().userName}}</b></span> }
+    @if (searchParams().repository) { <span>Repositorio: <b> {{searchParams().repository}}</b></span>}
+    @if (searchParams().language) { <span>escrito en: <b> {{searchParams().language}}</b></span>}
+    @if (searchParams().sort) {  <span>ordernar por: <b> {{searchParams().sort}}</b></span>}
+    @if(hasAtLeastTwoValues()){
+      <button (click)="resetForm()" class=" text-black hover:text-cyan-700">
+        <i class="fa-solid fa-circle-xmark mr-1"></i> Limpiar filtros
+      </button>
+    }
   </div>
 </form>

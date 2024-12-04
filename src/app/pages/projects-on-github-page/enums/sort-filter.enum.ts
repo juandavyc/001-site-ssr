@@ -1,5 +1,5 @@
 export enum SortFilter {
-  updated = "Última actualización",
+  updated = "Actualizado",
   name = "Nombre",
   stars = "Estrellas",
 }

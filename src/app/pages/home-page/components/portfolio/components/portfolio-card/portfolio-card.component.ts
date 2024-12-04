@@ -3,13 +3,15 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Technology } from '../../../technologies/interfaces/technology.interface';
 import { UrlPortfolio } from '../../interfaces/portfolio.interface';
 import { BadgeComponent } from '../../../../../../shared/badge/badge.component';
+import { RandomCharactersPipe } from '../../../../../../shared/pipes/randomCharacters.pipe';
 
 @Component({
   selector: 'portfolio-card',
   standalone: true,
   imports: [
     CommonModule,
-    BadgeComponent
+    BadgeComponent,
+    RandomCharactersPipe
   ],
   templateUrl: './portfolio-card.component.html',
   styleUrl: './portfolio-card.component.css',

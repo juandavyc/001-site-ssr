@@ -1,3 +1,7 @@
+export interface UserFetchState{
+  data: GithubUserResponse | null;
+  error: boolean;
+}
 export interface GithubUserResponse {
   login:               string;
   id:                  number;

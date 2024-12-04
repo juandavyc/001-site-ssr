@@ -1,9 +1,9 @@
-import { computed, effect, inject, Injectable, signal } from '@angular/core';
-import { catchError, concat, concatMap, delay, filter, map, Observable, of, skip, switchMap, tap } from 'rxjs';
-import { GithubFiltersService } from './github-filters.service';
+import { inject, Injectable, signal } from '@angular/core';
+import { catchError, concat, delay, filter, map, Observable, of, skip, switchMap, tap } from 'rxjs';
+
 import { HttpClient } from '@angular/common/http';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
-import { User, UserState } from '../../projects-page/interfaces';
+import { GithubUserResponse, UserFetchState, } from '../interfaces';
 
 
 
@@ -12,25 +12,38 @@ import { User, UserState } from '../../projects-page/interfaces';
 })
 export class GithubUserProfileService {
 
-  private readonly API = 'https://api.github.com';
+  private readonly API = 'https://api.github.com/users';
+  private readonly API_FAKE = '/data/fakeUser.json';
+
   private http = inject(HttpClient);
   public userName = signal<string>('');
 
-  //  this.http.get(`${this.API}/users/${userName}`)
-
-  public getUserData = toSignal(
-    toObservable(this.userName).pipe(
-     // skip(1),
-      switchMap(userName =>
+  private userRequest$ = toObservable<string>(this.userName).pipe(
+    skip(1),
+    filter(userName => !!userName),
+    switchMap<string, Observable<UserFetchState>>(
+      (userName) =>
         concat(
           of({ data: null, error: false }),
-          this.http.get('/data/fakeUser.json').pipe(
-            map(data => ({ data, error: false })),
-            catchError((error) => of({ data: null, error: true }))
-          )
+          this.fetchUserData(userName)
         )
-      )
-    ),
-    { initialValue: {data:null, error:false} }
+    )
   );
+
+  private fetchUserData(userName: string): Observable<UserFetchState> {
+    const safeUserName = encodeURIComponent(userName);
+    const url = `${this.API}/${safeUserName}`;
+    //const url = `${this.API_FAKE}`;
+    //console.log(url,userName);
+    return this.http.get<GithubUserResponse>(url).pipe(
+      //tap(console.log),
+      map((data) => ({ data, error: false })),
+      catchError(() => of({ data: null, error: true }))
+    )
+  }
+
+  public userSignal = toSignal(this.userRequest$, {
+    initialValue: { data: null, error: false }
+  });
+
 }

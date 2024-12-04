@@ -1,7 +1,0 @@
-:host {
-  display: block;
-}
-
-.btn-active{
-  @apply text-cyan-700;
-}

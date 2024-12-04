@@ -6,11 +6,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/home-page/home-page.component')
   },
   {
-    path: 'projects',
-    loadComponent: () => import('./pages/projects-page/projects-page.component')
-  },
-  {
-    path: 'projects-on-github',
+    path: 'projects/github',
     loadComponent: () => import('./pages/projects-on-github-page/projects-on-github-page.component')
   },
   // {
