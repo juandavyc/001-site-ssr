@@ -5,7 +5,7 @@ export const tokenHeaderInterceptor: HttpInterceptorFn = (
   req,
   next
 ) => {
-  const token = environment.baseUrl;
+  const token = environment.token;
 
   if(token){
 
