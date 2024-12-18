@@ -1,0 +1,11 @@
+
+.modal{
+  @apply fixed inset-0 bg-black/70 backdrop-blur flex justify-center items-center z-40;
+}
+.modal-content{
+  @apply bg-slate-50 mt-4 p-4 rounded-lg w-full md:w-auto md:max-w-screen-md h-auto max-h-screen overflow-y-auto relative shadow-md;
+}
+.modal-close{
+  @apply fixed top-2 right-2 text-white rounded-full p-2 hover:bg-opacity-75 z-50 text-3xl;
+}
+

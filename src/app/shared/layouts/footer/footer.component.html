@@ -1,0 +1,16 @@
+<footer class="py-10 md:py-16 bg-gray-800">
+  <div class="container max-w-screen-xl mx-auto px-4">
+    <div class="text-center">
+      <div class="flex items-center justify-center gap-6">
+        @for (footer of content; track footer.id) {
+          <a [href]="footer.url" class="w-16 h-16 flex items-center justify-center rounded-full hover:bg-teal-600 transition ease-in-out duration-300 transform hover:scale-105 shadow-lg">
+            <i [class]="footer.icon" class="fa-2x text-white"></i>
+          </a>
+        }
+      </div>
+      <p class="mt-6 text-gray-400 text-sm">
+        © {{now() | date:'Y' }} Juandavyc. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,6 @@
+:host {
+  @apply flex justify-end gap-2;
+}
+a{
+  @apply text-blue-600 text-sm hover:text-blue-700 font-semibold flex items-center space-x-2 transition-all duration-300 ease-in-out hover:scale-105;
+}

@@ -1,0 +1,6 @@
+:host {
+  @apply grid grid-cols-3 gap-1 py-4;
+}
+.hover-publication{
+  @apply absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity hover:cursor-pointer flex items-center justify-center;
+}

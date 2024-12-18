@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SkillCardComponent } from './components/skill-card/skill-card.component';
 import { Skill } from './interfaces/skill.interface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'skills',
   standalone: true,
   imports: [
-    CommonModule,
-    SkillCardComponent
+    SkillCardComponent,
+    RouterLink
   ],
   templateUrl: './skills.component.html',
   styleUrl: './skills.component.css',
@@ -16,7 +17,7 @@ import { Skill } from './interfaces/skill.interface';
 })
 export class SkillsComponent {
 
-  public fakeApiResponse: Skill[] = [
+  public readonly content: Skill[] = [
     {
       "icon": "fa-solid fa-code fa-xl",
       "title": "Frontend y Backend",

@@ -1,28 +1,8 @@
-<section class="pt-24 pb-10">
+<section class="pb-10">
   <div class="container max-w-screen-lg mx-auto px-4">
-    <div class="text-center">
-      <h2 class="font-normal text-gray-900 text-4xl mb-8 md:text-7xl">Galeria</h2>
-      <p class="font-normal text-gray-600 text-sm mb-8 md:text-xl">
-        Como un instagram, pero criollo jaja
-      </p>
-    </div>
-  </div>
-</section>
-<section class="pt-24 pb-10">
-  <div class="container max-w-screen-lg mx-auto px-4">
-    <div class="grid grid-cols-3 gap-1">
-      <div class="relative w-full aspect-w-16 aspect-h-9">
-        <img src="/images/gallery/noah-1.jpg" class="object-cover w-full h-full max-h-80">
-      </div>
-      <div class="relative w-full aspect-w-1 aspect-h-1">
-        <img src="/images/gallery/noah-2.jpg" class="object-cover w-full h-full max-h-80">
-      </div>
-      <div class="relative w-full aspect-w-1 aspect-h-1">
-        <img src="/images/gallery/noah-1.jpg" class="object-cover w-full h-full max-h-80">
-      </div>
-      <div class="relative w-full aspect-w-1 aspect-h-1">
-        <img src="/images/gallery/noah-2.jpg" class="object-cover w-full h-full max-h-80">
-      </div>
-    </div>
+    <user-profile [data]="profile()" (toggle)="toggleUser()" />
+    <highlights [data]="highlights()" [user]="user()" />
+    <hr class="border-t-2 border-gray-300 my-4 mx-auto w-1/2">
+    <publications [data]="publications()" [user]="user()" />
   </div>
 </section>

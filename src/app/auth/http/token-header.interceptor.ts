@@ -1,5 +1,5 @@
 import type { HttpInterceptorFn } from '@angular/common/http';
-import { environment } from '../../../enviroments/environments';
+import { environment } from '../../../environments/environment';
 
 export const tokenHeaderInterceptor: HttpInterceptorFn = (
   req,
@@ -14,7 +14,6 @@ export const tokenHeaderInterceptor: HttpInterceptorFn = (
         Authorization: `Bearer ${token}`
       }
     })
-    //console.log('CLONE: ',cloneReq);
     return next(cloneReq);
   }
 

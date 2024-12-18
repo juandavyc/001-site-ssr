@@ -12,4 +12,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 
 })
-export class HeroSectionComponent { }
+export class HeroSectionComponent {
+  public readonly content = {
+    photo: '/images/juandavyc.png',
+    name: ' jUAN   daviD  yAra  CifUeNtEs ',
+    organization: 'fuLL stack dEVElOper',
+    note: 'la tEcnoloGÍa, el Aprendizaje   y construir soluciOnes   de Software sOn miS PRINCIPALES PASIONES.  '
+  };
+}

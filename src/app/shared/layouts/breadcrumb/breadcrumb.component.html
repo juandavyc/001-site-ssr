@@ -1,0 +1,15 @@
+<section class="py-5 md:py-5 mt-16">
+  <div class="container max-w-screen-xl mx-auto px-4">
+    <nav class="flex items-center text-sm text-gray-600">
+      @for (breadcrumb of breadcrumbs(); track $index; let last = $last) {
+        @if(!last){
+          <a [routerLink]="[breadcrumb.url]" class="hover:text-blue-600">{{ breadcrumb.label }}</a>
+          <span class="mx-2">/</span>
+        }
+        @if(last){
+          <span class="font-semibold text-gray-800"> {{ breadcrumb.label }}</span>
+        }
+      }
+    </nav>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+
+@let repositories = repositoriesData();
+@if (repositories !== null) {
+  @if (repositories.error && repositories.data) {
+    <p>Error al cargar</p> <br>
+    {{ repositories.data | json }}
+  }
+  @if (repositories.error){
+    <p>Error al cargar los repositorios</p>
+  }
+  @else {
+    @if (repositories.data === null) {
+      <repositories-skeleton [isGridView]="isGridView()"/>
+    }
+    @else {
+      @if (repositories.data.items && repositories.data.items.length > 0) {
+        <github-code [url]="url" />
+        <div class="grid grid-cols-1 gap-2" [ngClass]="isGridView() ? 'md:grid-cols-2' : 'md:grid-cols-1'">
+        @for (repository of repositories.data.items; track repository.id) {
+          <card [repository]="repository" />
+        }
+        <!-- paginacion-->
+         <div class="col-span-full">
+          <div class="flex justify-center pt-4 ">
+            {{ currentPage()}} / {{getMaxPages(repositories.data.total_count)}}
+          </div>
+          <div class="flex justify-center items-center">
+            <button
+              [disabled]="currentPage()<=1"
+              (click)="previousOrNextPage(-1)"
+              class="bg-transparent px-4 py-2 text-sky-700 hover:text-cyan-600 disabled:text-gray-400 disabled:cursor-not-allowed">
+              <i class="fa-solid fa-arrow-left"></i> Anterior
+            </button>
+            <button
+              [disabled]="getMaxPages(repositories.data.total_count) == currentPage()"
+              (click)="previousOrNextPage(+1)"
+              class="bg-transparent px-4 py-2 text-sky-700 hover:text-cyan-600 disabled:text-gray-400 disabled:cursor-not-allowed">
+              Siguiente <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    }
+  }
+}

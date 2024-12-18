@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BadgeComponent } from '../../../../shared/badge/badge.component';
+import { BadgeComponent } from '../../../../shared/components/badge/badge.component';
 import { Technology } from './interfaces/technology.interface';
 
 @Component({

@@ -17,28 +17,27 @@ import { RouterLink } from '@angular/router';
 })
 export class HobbiesComponent {
 
-  public fakeResponse = [
+  public readonly content = [
     {
-      id:1,
+      id: 1,
       title: 'Motocicletas y Mecánica',
-      icons:["fa-solid fa-motorcycle","fa-solid fa-wrench"],
+      icons: ["fa-solid fa-motorcycle", "fa-solid fa-wrench"],
       description: `Me apasionan las motos y la mecánica,
        disfruto mucho el manejar y la libertad de explorar nuevos lugares,
        es una gran parte de mi vida.`
     },
     {
-      id:2,
+      id: 2,
       title: 'GYM',
-      icons:["fa-solid fa-dumbbell","fa-solid fa-heart text-red-600"],
+      icons: ["fa-solid fa-dumbbell", "fa-solid fa-heart text-red-600"],
       description: `Voy al gimnasio todos los días, sí es posible, pero principalmente voy por salud, ademas me ayuda a mantenerme fuerte y en forma.`
     },
     {
-      id:3,
+      id: 3,
       title: 'Videojuegos',
-      icons:["fa-solid fa-dice","fa-solid fa-puzzle-piece"],
+      icons: ["fa-solid fa-dice", "fa-solid fa-puzzle-piece"],
       description: `Me encantan los videojuegos y la ciencia ficción,
-      entonces Halo y Cyberpunk 2077 son de mis favoritos.
-      Pero cualquier juego que suponga desafío tipo: AGE, Stellaris :heart:  `
+      entonces Halo y Cyberpunk 2077 son de mis favoritos, igual me encanta el Age of Empires II `
     }
   ]
 }

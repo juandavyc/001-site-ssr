@@ -1,13 +1,19 @@
-<div class="bg-gray-50 px-8 py-10 rounded-md">
-  <h4 class="font-bold text-gray-700 text-lg mb-4">
-  {{title()}}
-  </h4>
-  <div class="flex justify-center gap-2">
-    @for (icon of icons(); track $index) {
-      <i [class]="icon" class="fa-2x"></i>
-    }
+<div class="flex justify-center gap-2">
+  <div class="relative w-20 py-6 flex justify-center mb-4 gap-4">
+  @for (icon of icons(); track $index) {
+    <i [class]="icon" class="fa-2x"></i>
+  }
   </div>
-  <p class="font-normal text-gray-500 text-md m-4">
-    {{description()}}
-  </p>
 </div>
+<div class="relative">
+  <div class="absolute -left-2 inset-0 w-8">
+    <div class="absolute -top-1 left-0 w-[1px] h-full bg-teal-600"></div>
+    <div class="absolute top-0 -left-1 h-[1px] w-full bg-teal-600"></div>
+  </div>
+  <h4 class="font-bold text-gray-700 text-lg mb-4 text-center md:text-left">
+    {{title()}}
+  </h4>
+</div>
+<p class="font-normal text-gray-500 text-md m-4 text-justify">
+  {{description()}}
+</p>

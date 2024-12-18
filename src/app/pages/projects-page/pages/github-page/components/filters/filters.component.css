@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+.input-username{
+  @apply w-full pl-10 pr-4 py-2 border-gray-300 border rounded-lg md:rounded-2xl md:rounded-e-none md:border-e-0;
+}
+.input-repository{
+  @apply w-full pl-10 pr-4 py-2 border-gray-300 border rounded-lg lg:rounded-2xl lg:rounded-s-none;
+}

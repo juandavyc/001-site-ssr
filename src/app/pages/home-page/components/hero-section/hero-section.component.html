@@ -2,12 +2,23 @@
   <div class="container max-w-screen-xl mx-auto px-4">
     <div class="text-center">
       <div class="flex justify-center mb-16">
-        <img src="/images/juandavyc.png" alt="Image">
+        <img
+          [src]="content.photo"
+          alt="juandavyc.png"
+          class="shadow-md rounded-full transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-xl">
+
       </div>
-      <h5 class="uppercase font-medium text-gray-600 text-lg mb-8 md:text-2xl">JUAN DAVID YARA CIFUENTES</h5>
-      <h2 class="font-normal text-gray-900 text-4xl mb-8 md:text-7xl">Full Stack Developer</h2>
+
+      <h5 class="font-medium text-gray-600 text-lg mb-8 md:text-2xl">
+        {{content.name | titlecase}}
+      </h5>
+
+      <h2 class="font-normal text-gray-900 text-4xl mb-8 md:text-7xl">
+        {{content.organization | titlecase }}
+      </h2>
+
       <p class="font-normal text-gray-600 text-sm mb-8 md:text-xl">
-        La tecnología, el aprendizaje y construir soluciones de software son mis principales pasiones.
+        {{content.note | lowercase }}
       </p>
     </div>
   </div>
