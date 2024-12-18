@@ -8,12 +8,13 @@ export const REPOSITORY_URLS = {
     highlights: 'https://github.com/juandavyc/001-site-ssr/tree/main/src/app/pages/gallery-page/components/highlights',
     publications: 'https://github.com/juandavyc/001-site-ssr/tree/main/src/app/pages/gallery-page/components/publications',
     profile: 'https://github.com/juandavyc/001-site-ssr/tree/main/src/app/pages/gallery-page/components/user-profile',
-  }
+  },
+  home: 'https://github.com/juandavyc/001-site-ssr'
 };
 
 export const SEO_CONSTANTS = {
   home: {
-    title: "Juan Yara | Home",
+    title: "Juan David Yara | Home",
     description: "Soy un desarrollador fullstack con experiencia en Angular, React, Spring Boot, PHP y bases de datos como MySQL, SQL Server y PostgreSQL. Explora mis proyectos y contáctame.",
     tags: "desarrollador fullstack, Angular, React, Spring Boot, PHP, MySQL, SQL Server, PostgreSQL, portafolio, desarrollo web"
   },

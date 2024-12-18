@@ -26,7 +26,7 @@
       <div class="-mr-2 sm:hidden">
         <button
           (click)="toggleMenu()"
-          class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+          class="inline-flex items-center justify-center p-2 text-xl rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
           @if(isMenuOpen()){
             <i class="fa-solid fa-xmark"></i>
           }
@@ -37,7 +37,19 @@
       </div>
     </div>
   </div>
+  <div class="fixed -bottom-[60px] right-0 z-40">
+    <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <polygon points="24,0 24,24 0,0" fill="#10B981"/>
+    </svg>
+    <a [href]="url"
+      target="_blank"
+      class="absolute top-0 right-0 p-2 text-white"
+      title="Repositorio de mi web">
+      <i class="fa-brands fa-github fa-rotate-by fa-xl fa-rotate-45" style="--fa-rotate-angle: 45deg;"></i>
+    </a>
+  </div>
 </nav>
+
 @if(isMenuOpen()){
   <div class="fixed inset-0 bg-black bg-opacity-50 z-40 sm:hidden backdrop-blur-sm" (click)="toggleMenu()"></div>
   <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-gray-800 rounded-lg z-50 p-6">

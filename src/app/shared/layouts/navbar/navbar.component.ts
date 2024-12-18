@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { REPOSITORY_URLS } from '../../../config/constants';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class NavbarComponent{
 
-
+  public url = REPOSITORY_URLS.home;
   // tengo pereza
   public menuItems = [
     { label: 'Inicio', route: '/home' },
