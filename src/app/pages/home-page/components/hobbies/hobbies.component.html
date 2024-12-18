@@ -1,5 +1,5 @@
 <section class="py-10 md:py-16">
-  <div class="container max-w-screen-xl mx-auto px-4">
+  <div class="container max-w-screen-xl mx-auto px-4" data-aos="fade-right">
     <h1 class="font-medium text-gray-700 text-3xl md:text-4xl mb-5">
       Hobbies
     </h1>
@@ -7,13 +7,13 @@
       Todo lo que me gusta hacer
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up-left">
 
       @for (hobby of content; track $index) {
       <hobby-card [title]="hobby.title" [icons]="hobby.icons" [description]="hobby.description" />
       }
     </div>
-    <div class="flex flex-col justify-center items-center mt-10 space-y-4">
+    <div class="flex flex-col justify-center items-center mt-10 space-y-4" data-aos="flip-left">
       <p class="text-gray-600 text-center text-sm md:text-base">
         Descubre lo que disfruto hacer en mi tiempo libre a través de imágenes
       </p>

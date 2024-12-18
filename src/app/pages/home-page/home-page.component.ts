@@ -13,7 +13,6 @@ import { SEO_CONSTANTS } from '../../config/constants';
   selector: 'app-home-page',
   standalone: true,
   imports: [
-    CommonModule,
     HeroSectionComponent,
     SkillsComponent,
     TechnologiesComponent,

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -14,7 +14,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './navbar.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavbarComponent {
+export class NavbarComponent{
+
 
   // tengo pereza
   public menuItems = [
@@ -28,5 +29,12 @@ export class NavbarComponent {
 
   public toggleMenu(): void {
     this.isMenuOpen.update(val => !val);
+  }
+
+  @HostListener('window:resize', ['$event.target.innerWidth'])
+  private onResize(width:number){
+    if (width >= 640) {
+      this.isMenuOpen.set(false);
+    }
   }
 }

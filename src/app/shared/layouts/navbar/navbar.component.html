@@ -37,15 +37,19 @@
       </div>
     </div>
   </div>
-  @if(isMenuOpen()){
-    <div class="sm:hidden bg-gray-300">
-      <div class="flex flex-col justify-center items-center px-2 pt-2 pb-3 space-y-1">
-        @for (item of menuItems; track $index) {
-        <a [routerLink]="[item.route]" class="block text-gray-700 hover:text-gray-300 font-medium">
+</nav>
+@if(isMenuOpen()){
+  <div class="fixed inset-0 bg-black bg-opacity-50 z-40 sm:hidden backdrop-blur-sm" (click)="toggleMenu()"></div>
+  <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-gray-800 rounded-lg z-50 p-6">
+    <div class="flex flex-col justify-center items-center space-y-4">
+      @for (item of menuItems; track $index) {
+        <a [routerLink]="[item.route]"
+           routerLinkActive="active"
+           class="block text-white hover:text-gray-300 font-medium text-xl p-3 transition duration-200 ease-in-out"
+           (click)="toggleMenu()">
           {{ item.label }}
         </a>
-        }
-      </div>
+      }
     </div>
-  }
-</nav>
+  </div>
+}

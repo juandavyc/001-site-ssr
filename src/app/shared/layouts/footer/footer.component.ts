@@ -17,7 +17,7 @@ export class FooterComponent {
   public content = [
     {
       id: 1,
-      url: '#',
+      url: 'https://juandavyc.netlify.app/home',
       icon: 'fa-solid fa-globe'
     },
     {
