@@ -1,13 +1,13 @@
 export const REPOSITORY_URLS = {
   github: {
-    filters: 'https://github.com/juandavyc/',
-    profile: 'https://github.com/juandavyc/',
-    repositories: 'https://github.com/juandavyc/',
+    filters: 'https://github.com/juandavyc/001-site-ssr/tree/main/src/app/pages/projects-page/pages/github-page/components/filters',
+    profile: 'https://github.com/juandavyc/001-site-ssr/tree/main/src/app/pages/projects-page/pages/github-page/components/profile',
+    repositories: 'https://github.com/juandavyc/001-site-ssr/tree/main/src/app/pages/projects-page/pages/github-page/components/repositories',
   },
   gallery: {
-    highlights: 'https://github.com/juandavyc/',
-    publications: 'https://github.com/juandavyc/',
-    profile: 'https://github.com/juandavyc/',
+    highlights: 'https://github.com/juandavyc/001-site-ssr/tree/main/src/app/pages/gallery-page/components/highlights',
+    publications: 'https://github.com/juandavyc/001-site-ssr/tree/main/src/app/pages/gallery-page/components/publications',
+    profile: 'https://github.com/juandavyc/001-site-ssr/tree/main/src/app/pages/gallery-page/components/user-profile',
   }
 };
 
