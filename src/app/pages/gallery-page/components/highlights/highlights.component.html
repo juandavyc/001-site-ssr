@@ -1,0 +1,35 @@
+@let highlights = data();
+@if(highlights.length > 0){
+  <div>
+    <github-code [url]="url"></github-code>
+  </div>
+  <div class="flex flex-row justify-center items-center gap-4 p-4;">
+    @for (highlight of data(); track highlight.id) {
+      <div class="flex flex-col justify-center items-center">
+        <img
+          (click)="show(highlight.id)"
+          [src]="user() | mediaUrl: highlight.multimedia.cover "
+          [alt]="'Destacada' + highlight.id"
+          class="highlight-cover" />
+        <span class="text-xs">
+          {{highlight.title}}
+        </span>
+      </div>
+    }
+  </div>
+}
+@else{
+  <highlights-skeleton/>
+}
+
+<modal #myModal (finished)="finished()">
+  @if (myModal.isOpen()) {
+    <timed-carousel
+      #myTimed
+      [multimedia]="multimedia()"
+      (isFinished)="finishedTimed()"
+      [user]="user()"
+      >
+    </timed-carousel>
+  }
+</modal>

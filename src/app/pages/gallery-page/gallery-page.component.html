@@ -1,0 +1,8 @@
+<section class="pb-10">
+  <div class="container max-w-screen-lg mx-auto px-4">
+    <user-profile [data]="profile()" (toggle)="toggleUser()" />
+    <highlights [data]="highlights()" [user]="user()" />
+    <hr class="border-t-2 border-gray-300 my-4 mx-auto w-1/2">
+    <publications [data]="publications()" [user]="user()" />
+  </div>
+</section>

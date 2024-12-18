@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+.previous-next{
+  @apply absolute top-1/2 transform -translate-y-1/2 bg-white/70 text-gray-500 px-4 py-2 rounded-full disabled:bg-transparent disabled:text-transparent;
+}
+

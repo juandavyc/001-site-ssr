@@ -1,0 +1,29 @@
+<section class="py-10 md:py-16">
+  <div class="container max-w-screen-xl mx-auto px-4">
+    <h1 class="font-medium text-gray-700 text-3xl md:text-4xl mb-5">
+      Hobbies
+    </h1>
+    <p class="font-normal text-gray-500 text-xs md:text-base mb-10">
+      Todo lo que me gusta hacer
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      @for (hobby of content; track $index) {
+      <hobby-card [title]="hobby.title" [icons]="hobby.icons" [description]="hobby.description" />
+      }
+    </div>
+    <div class="flex flex-col justify-center items-center mt-10 space-y-4">
+      <p class="text-gray-600 text-center text-sm md:text-base">
+        Descubre lo que disfruto hacer en mi tiempo libre a través de imágenes
+      </p>
+      <div class="flex items-center bg-emerald-700 hover:bg-emerald-500 transition-colors duration-300 ease-in-out rounded-lg px-4 py-2 text-white shadow-md hover:shadow-lg">
+        <i class="fa-solid fa-link w-5 text-white mr-2"></i>
+        <a [routerLink]="['/gallery']"
+           class="font-medium hover:underline text-sm md:text-base">
+          Galería de Imágenes
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

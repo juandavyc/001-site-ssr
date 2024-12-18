@@ -1,0 +1,4 @@
+.home-hr{
+  @apply border-t-2 border-gray-300 my-4 mx-auto w-1/2
+}
+

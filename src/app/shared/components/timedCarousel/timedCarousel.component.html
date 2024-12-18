@@ -1,0 +1,13 @@
+<photo-video-carousel
+  #myCarousel
+  [multimedia]="multimedia()"
+  (isFinished)="finished()"
+  (isChanged)="isChanged($event)"
+  [user]="user()">
+    <div class="absolute top-0 w-full text-white/50">
+      <div class="w-full bg-white/30 h-1">
+        <div class="bg-emerald-600 h-1 " [style.width.%]="progress()"></div>
+      </div>
+    </div>
+</photo-video-carousel>
+

@@ -1,0 +1,76 @@
+
+@let publications = sortedData();
+
+@if(publications.length > 0){
+  <div class="col-span-3">
+    <div class="flex justify-end">
+      <github-code [url]="url"></github-code>
+    </div>
+  </div>
+  @for (publication of sortedData(); track publication.id) {
+    <div class="relative w-full aspect-w-16 aspect-h-9 ">
+      <img
+        [src]="user() | mediaUrl:publication.multimedia.cover"
+        class="object-cover w-full max-h-80 ">
+      <span class="absolute top-1 right-1 text-white ">
+        <i [class]="(publication.type | publicationType)"></i>
+      </span>
+      <div
+        (click)="show(publication.id)"
+        class="hover-publication">
+        <div class="text-white">
+          <span class="font-bold">
+            <i class="fa-solid fa-heart w-5"></i>
+            {{publication.likes | number}} Me gusta
+          </span>
+        </div>
+      </div>
+    </div>
+  }
+}
+@else{
+  <publication-skeleton class="col-span-3"/>
+}
+<modal #myModal (finished)="finished()">
+ @if (myModal.isOpen()) {
+  <div class="grid grid-cols-1 md:grid-cols-3">
+    <div class="col-span-1 md:col-span-2">
+      <div class="flex justify-center items-center">
+        <photo-video-carousel [multimedia]="multimedia()" [user]="user()"/>
+      </div>
+    </div>
+    <div class="col-span-1">
+      @let publication  =current();
+      @if(publication){
+        <div class="flex flex-col justify-between bg-gray-50 h-full">
+          <div class="flex flex-col gap-1">
+            <h3 class="text-xl font-semibold text-gray-800 h-10 leading-10 px-3 bg-gray-200 ">
+              {{ publication.title }}
+            </h3>
+            <p class="text-sm px-3 py-2 text-wrap border">
+              {{publication.description }}
+            </p>
+            <span class="bg-slate-800 text-white text-xs font-medium py-1 px-2 rounded-sm w-fit mt-1">
+              {{ publication.type }}
+            </span>
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="flex flex-row items-center gap-1 px-3 ">
+              <i class="fa-solid fa-heart text-red-600 w-5"></i>
+              <span class="text-gray-800 font-bold">
+                {{ publication.likes | number}} Me gusta
+              </span>
+            </div>
+            <span class="text-xs text-gray-400 px-3">
+              {{ publication.created | date:'long'}}
+            </span>
+            <span class="text-xs text-gray-400 px-3">
+              Autor: {{ user() | titlecase }}
+             </span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+ }
+</modal>

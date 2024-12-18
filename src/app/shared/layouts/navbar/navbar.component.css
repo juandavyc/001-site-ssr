@@ -1,0 +1,6 @@
+:host {
+  display: block;
+}
+.active {
+  @apply text-emerald-600 font-bold border-b-2 border-emerald-600;
+}

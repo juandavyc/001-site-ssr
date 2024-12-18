@@ -1,0 +1,13 @@
+@if(isOpen()){
+  <div (click)="close()" class="modal">
+    <div (click)="$event.stopPropagation()" class="modal-content">
+      <ng-content />
+    </div>
+    <button (click)="close()" class="modal-close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+}
+
+
+
